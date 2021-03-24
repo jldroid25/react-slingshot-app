@@ -13,19 +13,24 @@ jobs:
   build:
     <<: *defaults
     steps:
-      - run: echo This is the Build Job
+      - checkout
+      - run: npm i
+      - run: npm run lint
 
   test:
     <<: *defaults
     steps:
-      - run: echo This is the Test Job
+      - checkout
+      - run: npm i
+      - run: npm run test
 
   analyse:
     <<: *defaults
     steps:
-      - run: echo This is the Analyse Job
+      - checkout
+      - run: npm audit
 
-
+# -------------- Workflows Section 
 workflows:
   Devops-CI-WF:
 
