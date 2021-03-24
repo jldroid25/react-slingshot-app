@@ -29,14 +29,13 @@ jobs:
 workflows:
   Devops-CI-WF:
 
-  jobs:
+    jobs:
+      - build
 
-    - build
+      - test:
+          requires:
+             -  build
 
-    - test:
-        requires:
-           -  build
-
-    - analyse:
-        requires:
-          - test 
+      - analyse:
+          requires:
+            - test 
