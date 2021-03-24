@@ -1,0 +1,42 @@
+#Anchor & Alias for code repetition. 
+defaults: &defaults
+  # use the the Docker Executor
+  docker:
+    # Use a light weight image | we can use
+      - image: circleci/node:13.8.0
+  working_directory: ~/project
+
+version: 2.1
+
+#-------Jobs Sections
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - run: echo This is the Build Job
+
+  test:
+    <<: *defaults
+    steps:
+      - run: echo This is the Test Job
+
+  analyse:
+    <<: *defaults
+    steps:
+      - run: echo This is the Analyse Job
+
+
+workflows:
+  Devops-CI-WF:
+
+  jobs:
+
+    - build
+
+    - test:
+        requires:
+           -  build
+
+    - analyse:
+        requires:
+          - test 
